@@ -303,24 +303,6 @@ import fs from 'fs';
 import path from 'path';
 import os from 'os';
 
-// Setup debug logging to a file in TMP directory
-const LOG_FILE = path.join(os.tmpdir(), 'jules_mcp_debug.log');
-
-function logDebug(message: string) {
-    const timestamp = new Date().toISOString();
-    const line = `[${timestamp}] ${message}\n`;
-    try {
-        fs.appendFileSync(LOG_FILE, line);
-    } catch (e) {
-        // Ignore logging errors
-    }
-}
-
-logDebug("--- SERVER STARTUP ---");
-logDebug(`Node Version: ${process.version}`);
-logDebug(`Platform: ${process.platform}`);
-logDebug(`WorkDir: ${process.cwd()}`);
-
 // Keep process alive
 process.on('uncaughtException', (error) => {
     console.error('Uncaught Exception:', error);

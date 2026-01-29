@@ -299,10 +299,6 @@ server.tool(
 // Helper to format activity for display
 // ... (omitted for brevity)
 
-import fs from 'fs';
-import path from 'path';
-import os from 'os';
-
 // Keep process alive
 process.on('uncaughtException', (error) => {
     console.error('Uncaught Exception:', error);

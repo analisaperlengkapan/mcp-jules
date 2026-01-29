@@ -1,9 +1,36 @@
-
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import { JulesClient } from "./jules-client.js";
 // import { getCurrentGitContext } from "./utils.js";
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
+
+// Setup debug logging to a file in TMP directory
+const LOG_FILE = path.join(os.tmpdir(), 'jules_mcp_debug.log');
+
+function logDebug(message: string) {
+    const timestamp = new Date().toISOString();
+    const line = `[${timestamp}] ${message}\n`;
+    try {
+        fs.appendFileSync(LOG_FILE, line);
+    } catch (e) {
+        // Ignore logging errors
+    }
+}
+
+// Redirect console.log to stderr to prevent breaking the JSON-RPC stream
+console.log = function(...args: any[]) {
+    const msg = args.map(arg => String(arg)).join(' ');
+    logDebug(`[STDOUT-REDIRECT] ${msg}`);
+    console.error(`[STDOUT-REDIRECT] ${msg}`);
+};
+
+// Log exit code
+process.on('exit', (code) => {
+    logDebug(`Process exiting with code: ${code}`);
+});
 
 const API_KEY = process.env.JULES_API_KEY || "";
 // ... (rest of code)

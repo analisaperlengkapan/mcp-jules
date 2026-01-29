@@ -3,7 +3,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import { JulesClient } from "./jules-client.js";
-import { getCurrentGitContext } from "./utils.js";
+// import { getCurrentGitContext } from "./utils.js";
 
 const API_KEY = process.env.JULES_API_KEY || "";
 // ... (rest of code)
@@ -56,7 +56,9 @@ server.tool(
                 startingBranch: starting_branch || 'main'
             }
         };
-    } else if (include_current_branch) {
+    }
+    /*
+    else if (include_current_branch) {
       const gitInfo = await getCurrentGitContext();
       if (gitInfo) {
         sourceContext = {
@@ -67,6 +69,7 @@ server.tool(
         };
       }
     }
+    */
 
     try {
       const session = await client.createSession({

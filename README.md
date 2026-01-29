@@ -86,4 +86,4 @@ Add the server to your MCP Client configuration (e.g., Claude Desktop, etc.):
 
 ## License
 
-ISC
+Apache-2.0

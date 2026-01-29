@@ -269,29 +269,66 @@ server.tool(
 // Helper to format activity for display
 // ... (omitted for brevity)
 
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
+
+// Setup debug logging to a file in TMP directory
+const LOG_FILE = path.join(os.tmpdir(), 'jules_mcp_debug.log');
+
+function logDebug(message: string) {
+    const timestamp = new Date().toISOString();
+    const line = `[${timestamp}] ${message}\n`;
+    try {
+        fs.appendFileSync(LOG_FILE, line);
+    } catch (e) {
+        // Ignore logging errors
+    }
+}
+
+logDebug("--- SERVER STARTUP ---");
+logDebug(`Node Version: ${process.version}`);
+logDebug(`Platform: ${process.platform}`);
+logDebug(`WorkDir: ${process.cwd()}`);
+
 // Keep process alive
 process.on('uncaughtException', (error) => {
     console.error('Uncaught Exception:', error);
+    logDebug(`Uncaught Exception: ${error instanceof Error ? error.stack : String(error)}`);
     process.exit(1);
 });
 
 process.on('unhandledRejection', (reason, promise) => {
     console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+    logDebug(`Unhandled Rejection: ${String(reason)}`);
     process.exit(1);
 });
 
 async function main() {
+  logDebug("Starting main()...");
   console.error("Starting Jules MCP Server...");
-  const transport = new StdioServerTransport();
-  console.error("Transport created. Connecting server...");
-  await server.connect(transport);
-  console.error("Server connected via Stdio.");
+  
+  try {
+      const transport = new StdioServerTransport();
+      console.error("Transport created. Connecting server...");
+      logDebug("Transport created. Connecting server...");
+      
+      await server.connect(transport);
+      console.error("Server connected via Stdio.");
+      logDebug("Server connected via Stdio. Waiting for requests...");
+  } catch (err) {
+      logDebug(`Fatal Error during connect: ${err instanceof Error ? err.stack : String(err)}`);
+      throw err;
+  }
 
   // Keep the event loop active
-  setInterval(() => {}, 30000);
+  setInterval(() => {
+    // Heartbeat
+  }, 30000);
 }
 
 main().catch((error) => {
   console.error("Fatal Server error in main:", error);
+  logDebug(`Fatal Server error in main: ${error instanceof Error ? error.stack : String(error)}`);
   process.exit(1);
 });

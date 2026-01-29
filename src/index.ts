@@ -8,11 +8,13 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const API_KEY = process.env.JULES_API_KEY;
+const API_KEY = process.env.JULES_API_KEY || "";
 
 if (!API_KEY) {
-  console.error("Error: JULES_API_KEY environment variable is required.");
-  process.exit(1);
+  console.error("Warning: JULES_API_KEY environment variable is missing!");
+  console.error("The server will start, but Jules-related tools will fail until the key is configured.");
+} else {
+  console.error("JULES_API_KEY found (length: " + API_KEY.length + ")");
 }
 
 const client = new JulesClient(API_KEY);
@@ -265,12 +267,25 @@ server.tool(
     }
 );
 
+process.on('uncaughtException', (error) => {
+    console.error('Uncaught Exception:', error);
+    process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+    process.exit(1);
+});
+
 async function main() {
+  console.error("Starting Jules MCP Server...");
   const transport = new StdioServerTransport();
+  console.error("Transport created. Connecting server...");
   await server.connect(transport);
+  console.error("Server connected via Stdio.");
 }
 
 main().catch((error) => {
-  console.error("Server error:", error);
+  console.error("Fatal Server error in main:", error);
   process.exit(1);
 });

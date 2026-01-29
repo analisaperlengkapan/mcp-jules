@@ -1,0 +1,32 @@
+{
+  "name": "jules-mcp-server",
+  "version": "0.1.0",
+  "description": "MCP Server for Google Jules Agent",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/index.js",
+    "dev": "ts-node src/index.ts",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "mcp",
+    "jules",
+    "ai",
+    "agent"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.1",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  }
+}

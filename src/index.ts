@@ -4,11 +4,10 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { JulesClient } from "./jules-client.js";
 import { getCurrentGitContext } from "./utils.js";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const API_KEY = process.env.JULES_API_KEY || "";
+// ... (rest of code)
+// ...
 
 if (!API_KEY) {
   console.error("Warning: JULES_API_KEY environment variable is missing!");
@@ -267,6 +266,10 @@ server.tool(
     }
 );
 
+// Helper to format activity for display
+// ... (omitted for brevity)
+
+// Keep process alive
 process.on('uncaughtException', (error) => {
     console.error('Uncaught Exception:', error);
     process.exit(1);
@@ -283,6 +286,9 @@ async function main() {
   console.error("Transport created. Connecting server...");
   await server.connect(transport);
   console.error("Server connected via Stdio.");
+
+  // Keep the event loop active
+  setInterval(() => {}, 30000);
 }
 
 main().catch((error) => {

@@ -1,0 +1,38 @@
+{
+  "manifest_version": "0.3",
+  "name": "mcp-jules",
+  "display_name": "Jules MCP Server",
+  "version": "1.0.0",
+  "description": "A Model Context Protocol server for Google Jules Agent",
+  "author": {
+    "name": "analisaperlengkapan",
+    "email": "support@analisaperlengkapan.com"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "build/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${extension_root}/build/index.js"],
+      "env": {
+        "JULES_API_KEY": "${user_config.JULES_API_KEY}"
+      }
+    }
+  },
+  "user_config": {
+    "JULES_API_KEY": {
+      "type": "string",
+      "title": "Jules API Key",
+      "description": "Your Google Jules API Key from jules.google.com",
+      "required": true,
+      "sensitive": true
+    }
+  },
+  "compatibility": {
+    "claude_desktop": ">=1.0.0",
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=16.0.0"
+    }
+  }
+}

@@ -54,7 +54,22 @@ You can run the server directly using Node:
 node build/index.js
 ```
 
-### integrating with MCP Clients
+### Integrating with MCP Clients
+
+#### Option A: One-Click Bundle (Claude Desktop)
+
+1.  Generate the bundle:
+    ```bash
+    npm run pack
+    ```
+    This creates `mcp-jules.mcpb`.
+
+2.  In Claude Desktop:
+    - Go to **Settings** > **Developer** > **Install Extension**.
+    - Select `mcp-jules.mcpb`.
+    - Provide your API Key when prompted.
+
+#### Option B: Manual Config
 
 Add the server to your MCP Client configuration (e.g., Claude Desktop, etc.):
 

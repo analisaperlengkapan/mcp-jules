@@ -84,6 +84,14 @@ Add to your Claude Desktop configuration (`claude_desktop_config.json`):
 }
 ```
 
+### With Claude Code (CLI)
+
+You can add this server to [Claude Code](https://claude.ai/code) by running:
+
+```bash
+claude mcp add jules --env JULES_API_KEY=your-api-key-here -- node /path/to/jules-mcp-server/dist/index.js
+```
+
 ### Command Line
 
 ```bash

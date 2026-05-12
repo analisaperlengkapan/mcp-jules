@@ -272,7 +272,8 @@ Lists GitHub repositories connected to your Jules account via the Jules web UI.
 Gets details about a specific connected repository, including all available branches.
 
 - **Arguments**:
-  - `sourceId` (string, required): The resource name (e.g., `github-owner-repo`).
+  - `sourceId` (string, required): The source ID (e.g., `github-owner-repo`). This is not the `sources/...` resource name used by `sourceContext.source`.
+  - `response_format` (string, optional): Controls the response format returned by the tool.
 
 ## Real-World Examples
 

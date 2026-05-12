@@ -124,6 +124,7 @@ Creates a new coding session where Jules executes a task on a repository.
   - `title` (string, optional): Session title.
   - `requirePlanApproval` (boolean, optional): If Jules should wait for plan approval.
   - `automationMode` (string, optional): Use `AUTO_CREATE_PR` to automatically create a PR on completion.
+  - `response_format` (string, optional): Response format, either `markdown` or `json`.
 
 - **Example Response (Markdown)**:
 

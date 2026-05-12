@@ -110,7 +110,7 @@ node dist/index.js --help
 
 ## Tool Reference
 
-The server provides a suite of tools to interact with Jules. Each tool supports a `response_format` parameter (`markdown` or `json`).
+The server provides a suite of tools to interact with Jules. Some tools support a `response_format` parameter (`markdown` or `json`); refer to each tool's documented arguments to see whether it is accepted.
 
 ### Session Tools
 

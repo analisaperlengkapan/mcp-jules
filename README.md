@@ -263,6 +263,9 @@ Lists GitHub repositories connected to your Jules account via the Jules web UI.
 
 - **Arguments**:
   - `filter` (string, optional): Filter by name (e.g., `name=sources/github-owner-repo`).
+  - `pageSize` (number, optional): Results per page.
+  - `pageToken` (string, optional): Pagination token.
+  - `response_format` (string, optional): Response format for the returned data.
 
 #### `jules_get_source`
 

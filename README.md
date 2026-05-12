@@ -144,6 +144,7 @@ Lists all your coding sessions.
 - **Arguments**:
   - `pageSize` (number, optional): Max results per page (1-100, default: 20).
   - `pageToken` (string, optional): Token for the next page.
+  - `response_format` (string, optional): Format for the response output.
 
 - **Example Response (JSON)**:
   ```json

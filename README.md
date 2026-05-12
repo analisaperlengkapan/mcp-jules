@@ -242,8 +242,9 @@ Lists all activities (events, plan generation, code changes, messages) for a ses
 
 - **Arguments**:
   - `sessionId` (string, required): The ID of the session.
-  - `pageSize` (number, optional): Results per page.
+  - `pageSize` (number, optional): Results per page. Must be between `1` and `100`. Defaults to the schema-defined default when omitted.
   - `pageToken` (string, optional): Pagination token.
+  - `response_format` (string, optional): Response format for the returned activities.
 
 #### `jules_get_activity`
 

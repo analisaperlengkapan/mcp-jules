@@ -253,6 +253,7 @@ Gets detailed information about a specific activity. This is how you view code d
 - **Arguments**:
   - `sessionId` (string, required): The ID of the session.
   - `activityId` (string, required): The activity ID.
+  - `response_format` (string, optional): Controls the format of the returned activity details.
 
 ### Source Tools
 

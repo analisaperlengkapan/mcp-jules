@@ -107,6 +107,7 @@ The server provides a suite of tools to interact with Jules. Each tool supports 
 ### Session Tools
 
 #### `jules_create_session`
+
 Creates a new coding session where Jules executes a task on a repository.
 
 - **Arguments**:
@@ -117,8 +118,10 @@ Creates a new coding session where Jules executes a task on a repository.
   - `automationMode` (string, optional): Use `AUTO_CREATE_PR` to automatically create a PR on completion.
 
 - **Example Response (Markdown)**:
+
   ```markdown
   ## Session: Add auth tests
+
   **ID:** 1234567
   **State:** ⏳ QUEUED
   **Prompt:** Add unit tests for the authentication module
@@ -126,6 +129,7 @@ Creates a new coding session where Jules executes a task on a repository.
   ```
 
 #### `jules_list_sessions`
+
 Lists all your coding sessions.
 
 - **Arguments**:
@@ -149,6 +153,7 @@ Lists all your coding sessions.
   ```
 
 #### `jules_get_session`
+
 Retrieves full details for a specific session, including current state, URL, and outputs (like PR links) if completed.
 
 - **Arguments**:
@@ -156,8 +161,10 @@ Retrieves full details for a specific session, including current state, URL, and
   - `response_format` (string, optional): 'markdown' (default) or 'json'.
 
 - **Example Response (Markdown)**:
+
   ```markdown
   ## Session: Add auth tests
+
   **ID:** 1234567
   **State:** ✅ COMPLETED
   **Prompt:** Add unit tests for the authentication module
@@ -167,7 +174,9 @@ Retrieves full details for a specific session, including current state, URL, and
   **Updated:** Oct 27, 2023, 10:45 AM
 
   ### Outputs
+
   **Pull Request:** [Add auth unit tests](https://github.com/myorg/myrepo/pull/42)
+
   > This PR adds comprehensive unit tests for the auth module.
   ```
 
@@ -194,12 +203,14 @@ Retrieves full details for a specific session, including current state, URL, and
   ```
 
 #### `jules_delete_session`
+
 Deletes a coding session. This cannot be undone.
 
 - **Arguments**:
   - `sessionId` (string, required): The ID of the session.
 
 #### `jules_send_message`
+
 Sends a message to an active session. Use this to provide feedback, answer Jules's questions, or change instructions mid-session.
 
 - **Arguments**:
@@ -207,6 +218,7 @@ Sends a message to an active session. Use this to provide feedback, answer Jules
   - `prompt` (string, required): Your message.
 
 #### `jules_approve_plan`
+
 Approves a pending plan. Required if `requirePlanApproval` was set to `true` during session creation. Once approved, Jules begins execution.
 
 - **Arguments**:
@@ -215,6 +227,7 @@ Approves a pending plan. Required if `requirePlanApproval` was set to `true` dur
 ### Activity Tools
 
 #### `jules_list_activities`
+
 Lists all activities (events, plan generation, code changes, messages) for a session.
 
 - **Arguments**:
@@ -223,6 +236,7 @@ Lists all activities (events, plan generation, code changes, messages) for a ses
   - `pageToken` (string, optional): Pagination token.
 
 #### `jules_get_activity`
+
 Gets detailed information about a specific activity. This is how you view code diffs (`changeSet`), bash outputs, or full plan details.
 
 - **Arguments**:
@@ -232,12 +246,14 @@ Gets detailed information about a specific activity. This is how you view code d
 ### Source Tools
 
 #### `jules_list_sources`
+
 Lists GitHub repositories connected to your Jules account via the Jules web UI.
 
 - **Arguments**:
   - `filter` (string, optional): Filter by name (e.g., `name=sources/github-owner-repo`).
 
 #### `jules_get_source`
+
 Gets details about a specific connected repository, including all available branches.
 
 - **Arguments**:
@@ -269,27 +285,27 @@ Gets details about a specific connected repository, including all available bran
 
 ## Session States
 
-| State | Description |
-| :--- | :--- |
-| `QUEUED` | Session created, waiting for processing. |
-| `PLANNING` | Jules is analyzing the codebase and creating a plan. |
+| State                    | Description                                          |
+| :----------------------- | :--------------------------------------------------- |
+| `QUEUED`                 | Session created, waiting for processing.             |
+| `PLANNING`               | Jules is analyzing the codebase and creating a plan. |
 | `AWAITING_PLAN_APPROVAL` | Plan is ready and requires your approval to proceed. |
-| `AWAITING_USER_FEEDBACK` | Jules has a question or needs more information. |
-| `IN_PROGRESS` | Jules is executing the task/plan. |
-| `PAUSED` | Execution has been temporarily halted. |
-| `COMPLETED` | Task finished successfully (check for PR link). |
-| `FAILED` | Task failed. Check activities for error details. |
+| `AWAITING_USER_FEEDBACK` | Jules has a question or needs more information.      |
+| `IN_PROGRESS`            | Jules is executing the task/plan.                    |
+| `PAUSED`                 | Execution has been temporarily halted.               |
+| `COMPLETED`              | Task finished successfully (check for PR link).      |
+| `FAILED`                 | Task failed. Check activities for error details.     |
 
 ## Troubleshooting
 
-| Error | Meaning | Resolution |
-| :--- | :--- | :--- |
-| **401 Unauthorized** | Invalid API Key | Check your `JULES_API_KEY` environment variable and ensure it's valid. |
-| **403 Forbidden** | Permission Denied | Ensure your API key has access to the requested resource or repository. |
-| **404 Not Found** | Resource Missing | Verify the `sessionId`, `activityId`, or `sourceId` is correct. |
-| **429 Too Many Requests**| Rate Limited | You've exceeded the API rate limit. Wait a few minutes before retrying. |
-| **500 / 503** | Jules API Error | The Jules service is experiencing issues. Try again later or check [Jules Status](https://jules.google). |
-| **ECONNREFUSED** | Network Error | Check your internet connection or firewall settings. |
+| Error                     | Meaning           | Resolution                                                                                               |
+| :------------------------ | :---------------- | :------------------------------------------------------------------------------------------------------- |
+| **401 Unauthorized**      | Invalid API Key   | Check your `JULES_API_KEY` environment variable and ensure it's valid.                                   |
+| **403 Forbidden**         | Permission Denied | Ensure your API key has access to the requested resource or repository.                                  |
+| **404 Not Found**         | Resource Missing  | Verify the `sessionId`, `activityId`, or `sourceId` is correct.                                          |
+| **429 Too Many Requests** | Rate Limited      | You've exceeded the API rate limit. Wait a few minutes before retrying.                                  |
+| **500 / 503**             | Jules API Error   | The Jules service is experiencing issues. Try again later or check [Jules Status](https://jules.google). |
+| **ECONNREFUSED**          | Network Error     | Check your internet connection or firewall settings.                                                     |
 
 ## Development
 

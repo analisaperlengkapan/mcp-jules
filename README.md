@@ -1,7 +1,7 @@
 # Jules MCP Server
 
 [![Status](https://img.shields.io/badge/status-GitHub%20Actions-2088FF?style=flat-square)](.github/workflows/ci.yml)
-[![Version](https://img.shields.io/badge/version-1.0.0-0ea5e9?style=flat-square)](package.json)
+[![Version](https://img.shields.io/badge/version-0.1.1-0ea5e9?style=flat-square)](package.json)
 
 MCP (Model Context Protocol) server for [Google Jules](https://jules.google) - the AI coding agent. This server enables LLMs like Claude to interact with Jules API, creating and managing coding sessions programmatically.
 
